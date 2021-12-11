@@ -46,45 +46,29 @@ function emojiData(){
             return response.json();
         })
         .then(function(data) {
+            console.log(data);
             
-            //prints the first 5 emojis
+            //consolelogs 5 random  emojis
             for (var i = 0; i<5; i++) {
                 
-                console.log(data[i].character);
-            }
-
-            //print 5 random emojis
-            
-                var randomNum = Math.floor(Math.random(data.length))
+                var randomNum = Math.floor(Math.random()* data.length);
+                console.log(randomNum);
+                
                 console.log(data[randomNum].character);
-            
+                
+                randomEmojis.push(data[randomNum].character);
+                console.log(randomEmojis);
+                
+                
+            }
 
         })
 
 };
 
-// emojiData();
 
-// From the internet
-const emojiField = $('.btn1');
-
-function setEmoji(emoji) {
-    emojiField.innerHTML = emoji;
-}
-function getRandom() {
-    fetch('https://emoji-api.com/emojis?access_key=071b064c01a03d65b33d0d975453d8573c749c65')
-      .then(response => {
-        response.json().then(data => {
-          // console.log('data', data)
-          setEmoji(data.emoji)
-        })
-      });
-  }
-  
-  getRandom();
-
-
-
+ emojiData();
+ 
 // Display-Render
 
 // Displays question to document
