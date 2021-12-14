@@ -23,6 +23,7 @@ var selectedEmojis = [];
 var madLibTicker = 0;
 var madLibBlanks;
 var emojiTicker = 0;
+var madMojiTicker = 0;
 
 // Page load
 madlibData();
@@ -42,17 +43,33 @@ startGameButtonEl.on('click', function(){
 
 
 // Generates next question after emoji is selected
+questionContainerEl.on('click', playMadMoji);
 
-questionContainerEl.on('click', nextQuestion);
+// Saves selected emoji by pushing it via event target into the selectedEmojis array
+function playMadMoji (event) {
+    if (madMojiTicker < madLibBlanks.blanks.length - 1) {
+        
+        selectedEmojis.push(event.target.innerText);
+        console.log(selectedEmojis);
+        questionContainerEl.empty();
+        chooseMadLibBlanks();
+        renderEmojiButtons();
+        madMojiTicker++;
 
-// // Saves selected emoji by pushing it via event target into the selectedEmojis array
-function nextQuestion (event) {
-    selectedEmojis.push(event.target.innerText);
-    console.log(selectedEmojis);
-    questionContainerEl.empty();
-    chooseMadLibBlanks();
-    renderEmojiButtons();
+    } else if (madMojiTicker < madLibBlanks.blanks.length) {
+        selectedEmojis.push(event.target.innerText);
+        console.log(selectedEmojis);
+        questionContainerEl.empty();
+        
+    } else {
+        printMadMoji();
+    }
 }
+
+// End game function
+function printMadMoji () {
+    console.log("ya' done.")
+};
 
 
 // Fetch Requests
