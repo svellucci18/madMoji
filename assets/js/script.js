@@ -22,8 +22,11 @@ var randomEmojis = [];
 var selectedEmojis = [];
 var madLibTicker = 0;
 var madLibBlanks;
+var emojiTicker = 0;
 
-// Event Listeners
+// Page load
+madlibData();
+emojiData();
 
 // Hides the start game button
 startGameButtonEl.on('click', function(){
@@ -31,9 +34,10 @@ startGameButtonEl.on('click', function(){
     // Hide start game button on document.
     startGameButtonEl.addClass('hide');
 
-    // Displays question to document.
-    madlibData();
-    emojiData();
+    // Render Questions
+    chooseMadLibBlanks();
+    renderEmojiButtons();
+
 })
 
 
@@ -46,8 +50,8 @@ function nextQuestion (event) {
     selectedEmojis.push(event.target.innerText);
     console.log(selectedEmojis);
     questionContainerEl.empty();
-    madlibData();
-    emojiData();
+    chooseMadLibBlanks();
+    renderEmojiButtons();
 }
 
 
@@ -65,47 +69,25 @@ function emojiData(){
         .then(function(data) {
             console.log(data);
             
-            //consolelogs 5 random  emojis
-            for (var i = 0; i<5; i++) {
-                
+            // Collect 100 emojis
+            for (var i = 0; i<100; i++) {
+                // Generate a random number
                 var randomNum = Math.floor(Math.random()* data.length);
-                console.log(randomNum);
                 
-                console.log(data[randomNum].character);
-                
+                // Push 100 random emojis into randomEmojis array
                 randomEmojis.push(data[randomNum].character);
-                console.log(randomEmojis);
-                
-                
+               
             }
+            console.log(randomEmojis);
 
-            // Added id's to buttons
-            questionContainerEl.append(`
-                
-                <a id="btn-1" class="waves-effect waves-light btn-large deep-orange accent-3 btn1">${randomEmojis[0]}</a>
-           
-                <a id="btn-2" class="waves-effect waves-light btn-large deep-orange accent-3 btn2">${randomEmojis[1]}</a>
-           
-                <a id="btn-3" class="waves-effect waves-light btn-large deep-orange accent-3 btn3">${randomEmojis[2]}</a>
-           
-                <a id="btn-4" class="waves-effect waves-light btn-large deep-orange accent-3 btn4">${randomEmojis[3]}</a>
-           
-                <a id="btn-5" class="waves-effect waves-light btn-large deep-orange accent-3 btn5">${randomEmojis[4]}</a>
-                `)        
         })
 
 };
 
-
- 
- 
-// Display-Render
-
+// Grab madlib data
 function madlibData(){
 
     var url = `http://madlibz.herokuapp.com/api/random?minlength=5&maxlength=10`;
-
-    
 
     fetch( url )
         .then(function(response) {
@@ -116,18 +98,37 @@ function madlibData(){
             
             madLibBlanks = data;
 
-            console.log(madLibBlanks);
-
-            //     // Presents the blank category of the madlib
-            //     questionContainerEl.append(`
-            //     <h2 id= "word-picker" class = "h2">Pick a ${data.blanks[madLibTicker]}!</h2>
-           
-                
-            //     `)
-            // // Increments after first blank has been called
-            // madLibTicker++;
-                
         })
 
 };
-    
+
+
+// Render question headers
+function chooseMadLibBlanks() {
+                
+    // Presents the blank category of the madlib
+        console.log(madLibBlanks);
+        questionContainerEl.append(`
+        <h2 id= "word-picker" class = "h2">Pick a ${madLibBlanks.blanks[madLibTicker]}!</h2>
+        `)
+
+        // Increments after first blank has been called
+        madLibTicker++;
+
+};
+
+// Render Emoji Buttons
+function renderEmojiButtons() {
+    // Added id's to buttons
+        questionContainerEl.append(`
+        <a id="btn-1" class="waves-effect waves-light btn-large deep-orange accent-3 btn1">${randomEmojis[emojiTicker]}</a>
+        <a id="btn-2" class="waves-effect waves-light btn-large deep-orange accent-3 btn2">${randomEmojis[emojiTicker + 1]}</a>
+        <a id="btn-3" class="waves-effect waves-light btn-large deep-orange accent-3 btn3">${randomEmojis[emojiTicker + 2]}</a>
+        <a id="btn-4" class="waves-effect waves-light btn-large deep-orange accent-3 btn4">${randomEmojis[emojiTicker + 3]}</a>
+        <a id="btn-5" class="waves-effect waves-light btn-large deep-orange accent-3 btn5">${randomEmojis[emojiTicker + 4]}</a>
+        `)
+
+        // Increments after first blank has been called
+        emojiTicker += 5;
+
+}
