@@ -56,19 +56,31 @@ function playMadMoji (event) {
         renderEmojiButtons();
         madMojiTicker++;
 
-    } else if (madMojiTicker < madLibBlanks.blanks.length) {
+    } else {
         selectedEmojis.push(event.target.innerText);
         console.log(selectedEmojis);
         questionContainerEl.empty();
-        
-    } else {
         printMadMoji();
-    }
+    } 
 }
 
 // End game function
 function printMadMoji () {
-    console.log("ya' done.")
+    console.log("ya' done.");
+    // Prints title of the current Madlib
+    questionContainerEl.append(`
+        <h2>${madLibBlanks.title}</h2>
+        <p id="madMoji"></p>
+        `)
+    
+    // Loops through the madlib and chosen emojis to generate a madMoji bitches
+    for ( var i=0; i < madLibBlanks.value.length -2; i++) {
+        $('#madMoji').append(madLibBlanks.value[i] + selectedEmojis[i] + " ");
+    }
+    $('#madMoji').append(madLibBlanks.value[madLibBlanks.value.length -2]);
+    
+    
+
 };
 
 
@@ -126,7 +138,7 @@ function chooseMadLibBlanks() {
     // Presents the blank category of the madlib
         console.log(madLibBlanks);
         questionContainerEl.append(`
-        <h2 id= "word-picker" class = "h2">Pick a ${madLibBlanks.blanks[madLibTicker]}!</h2>
+        <h2 id= "word-picker" class = "h2">Pick an Emoji!</h2>
         `)
 
         // Increments after first blank has been called
