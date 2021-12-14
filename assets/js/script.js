@@ -78,8 +78,8 @@ function printMadMoji () {
         $('#madMoji').append(madLibBlanks.value[i] + selectedEmojis[i] + " ");
     }
     $('#madMoji').append(madLibBlanks.value[madLibBlanks.value.length -2]);
-    
-    
+
+    // localStorage.setItem("recentMadMoji",questionContainerEl.innerText);
 
 };
 
