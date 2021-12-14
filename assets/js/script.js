@@ -20,6 +20,7 @@ var startGameButtonEl = $('#start-game');
 var questionContainerEl = $('#question-container');
 var randomEmojis = [];
 
+
 // Event Listeners
 
 // Hides the start game button
@@ -29,7 +30,8 @@ startGameButtonEl.on('click', function(){
     startGameButtonEl.addClass('hide');
 
     // Displays question to document.
-    renderQuestion();
+    madlibData();
+    emojiData();
 })
 
 
@@ -61,30 +63,71 @@ function emojiData(){
                 
                 
             }
-
+            questionContainerEl.append(`
+                
+                <a class="waves-effect waves-light btn-large deep-orange accent-3 btn1">${randomEmojis[0]}</a>
+           
+                <a class="waves-effect waves-light btn-large deep-orange accent-3 btn2">${randomEmojis[1]}</a>
+           
+                <a class="waves-effect waves-light btn-large deep-orange accent-3 btn3">${randomEmojis[2]}</a>
+           
+                <a class="waves-effect waves-light btn-large deep-orange accent-3 btn4">${randomEmojis[3]}</a>
+           
+                <a class="waves-effect waves-light btn-large deep-orange accent-3 btn5">${randomEmojis[4]}</a>
+                `)        
         })
 
 };
 
 
- emojiData();
+ 
  
 // Display-Render
 
 // Displays question to document
-function renderQuestion() {
-     questionContainerEl.append(`
-     <h2 id= "word-picker" class = "h2">Pick a noun!</h2>
+// function renderQuestion() {
+//      questionContainerEl.append(`
+//      <h2 id= "word-picker" class = "h2">Pick a ${data.blanks[0]}!</h2>
 
-     <a class="waves-effect waves-light btn-large deep-orange accent-3 btn1">Emoji 1</a>
+//      <a class="waves-effect waves-light btn-large deep-orange accent-3 btn1">Emoji 1</a>
 
-     <a class="waves-effect waves-light btn-large deep-orange accent-3 btn2">Emoji 2</a>
+//      <a class="waves-effect waves-light btn-large deep-orange accent-3 btn2">Emoji 2</a>
 
-     <a class="waves-effect waves-light btn-large deep-orange accent-3 btn3">Emoji 3</a>
+//      <a class="waves-effect waves-light btn-large deep-orange accent-3 btn3">Emoji 3</a>
 
-     <a class="waves-effect waves-light btn-large deep-orange accent-3 btn4">Emoji 4</a>
+//      <a class="waves-effect waves-light btn-large deep-orange accent-3 btn4">Emoji 4</a>
 
-     <a class="waves-effect waves-light btn-large deep-orange accent-3 btn5">Emoji 5 </a>
-     `)
-}
+//      <a class="waves-effect waves-light btn-large deep-orange accent-3 btn5">Emoji 5 </a>
+//      `)
+// }
+//  to fetch madlib API 
 
+function madlibData(){
+
+    var url = `http://madlibz.herokuapp.com/api/random`;
+
+    
+
+    fetch( url )
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data);
+           
+            console.log(data.blanks[0]);
+           
+           
+                questionContainerEl.append(`
+                <h2 id= "word-picker" class = "h2">Pick a ${data.blanks[0]}!</h2>
+           
+                
+                `)
+              
+                
+         
+
+        })
+
+};
+    
