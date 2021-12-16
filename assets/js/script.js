@@ -163,7 +163,7 @@ function chooseMadLibBlanks() {
     // Presents the blank category of the madlib
         console.log(madLibBlanks);
         questionContainerEl.append(`
-        <h2 id= "word-picker" class = "h2">Pick an Emoji!</h2>
+        <h2 id= "word-picker" class = "h2">Pick an Emoji-like ${madLibBlanks.blanks[madLibTicker]}!</h2>
         `)
 
         // Increments after first blank has been called
@@ -175,11 +175,11 @@ function chooseMadLibBlanks() {
 function renderEmojiButtons() {
     // Added id's to buttons
         questionContainerEl.append(`
-        <a id="btn-1" style="font-size: 30px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn1">${randomEmojis[emojiTicker]}</a>
-        <a id="btn-2" style="font-size: 30px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn2">${randomEmojis[emojiTicker + 1]}</a>
-        <a id="btn-3" style="font-size: 30px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn3">${randomEmojis[emojiTicker + 2]}</a>
-        <a id="btn-4" style="font-size: 30px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn4">${randomEmojis[emojiTicker + 3]}</a>
-        <a id="btn-5" style="font-size: 30px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn5">${randomEmojis[emojiTicker + 4]}</a>
+        <a id="btn-1" style="font-size: 30px; margin-top: 8px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn1">${randomEmojis[emojiTicker]}</a>
+        <a id="btn-2" style="font-size: 30px; margin-top: 8px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn2">${randomEmojis[emojiTicker + 1]}</a>
+        <a id="btn-3" style="font-size: 30px; margin-top: 8px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn3">${randomEmojis[emojiTicker + 2]}</a>
+        <a id="btn-4" style="font-size: 30px; margin-top: 8px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn4">${randomEmojis[emojiTicker + 3]}</a>
+        <a id="btn-5" style="font-size: 30px; margin-top: 8px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn5">${randomEmojis[emojiTicker + 4]}</a>
         `)
         
         // Increments after first blank has been called
