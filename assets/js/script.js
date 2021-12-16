@@ -18,6 +18,9 @@
 //Listener for start game button
 var startGameButtonEl = $('#start-game');
 var questionContainerEl = $('#question-container');
+var displayButtonEl= $("#display");
+var playAgainEl = $('#play-again');
+
 var randomEmojis = [];
 var selectedEmojis = [];
 var madLibTicker = 0;
@@ -35,6 +38,9 @@ startGameButtonEl.on('click', function(){
     // Hide start game button on document.
     startGameButtonEl.addClass('hide');
 
+    //
+    displayButtonEl.addClass('hide');
+
     // Render Questions
     chooseMadLibBlanks();
     renderEmojiButtons();
@@ -43,7 +49,9 @@ startGameButtonEl.on('click', function(){
 
 
 // Generates next question after emoji is selected
-questionContainerEl.on('click', playMadMoji);
+// questionContainerEl.on('click', playMadMoji);
+
+
 
 // Saves selected emoji by pushing it via event target into the selectedEmojis array
 function playMadMoji (event) {
@@ -69,7 +77,7 @@ function printMadMoji () {
     console.log("ya' done.");
     // Prints title of the current Madlib
     questionContainerEl.append(`
-        <h2>${madLibBlanks.title}</h2>
+        <h2 id="madMojiTitle">${madLibBlanks.title}</h2>
         <p id="madMoji"></p>
         `)
     //Save button show
@@ -85,14 +93,21 @@ function printMadMoji () {
         var madMoji = $("#madMoji")[0].textContent;
         console.log(madMoji);
         localStorage.setItem("madMoji", madMoji);
-        
+
+        var madMojiTitle = $("#madMojiTitle")[0].textContent;
+        console.log(madMojiTitle);
+        localStorage.setItem("madMojiTitle", madMojiTitle);        
     }
     
     saveBtn.on("click", saveMadmoji); 
-        
+
+    // Make play again button visible
+    playAgainEl.removeClass("hide");
 
 };
 
+// Listens for a click on the play again button
+playAgainEl.on("click", playAgain);
 
 // Fetch Requests
 // Grab the emoji Data
@@ -170,22 +185,42 @@ function renderEmojiButtons() {
         // Increments after first blank has been called
         emojiTicker += 5;
         
-        
+        // Connector Els to the buttons in the HTML
+        var btn1El = $('#btn-1');
+        var btn2El = $('#btn-2');
+        var btn3El = $('#btn-3');
+        var btn4El = $('#btn-4');
+        var btn5El = $('#btn-5');
+
+        // Event listeners for the button els
+        btn1El.on('click',playMadMoji);
+        btn2El.on('click',playMadMoji);
+        btn3El.on('click',playMadMoji);
+        btn4El.on('click',playMadMoji);
+        btn5El.on('click',playMadMoji);
     }
     
     
  function printRecentMoji(){
     displayButtonEl.addClass("hide");
     questionContainerEl.empty();
+    questionContainerEl.append(`<h2>${localStorage.getItem('madMojiTitle')}</h2>`);
     questionContainerEl.append(localStorage.getItem('madMoji'));
     startGameButtonEl.addClass("hide");
+    playAgainEl.removeClass('hide');
  }   
 
  
-   var displayButtonEl= $("#display");
    
    displayButtonEl.on("click", printRecentMoji);
 
+
+
+
+// This function lets the user play another round of madMoji.
+function playAgain () {
+    location.reload();
+}
 
  
 
