@@ -72,14 +72,24 @@ function printMadMoji () {
         <h2>${madLibBlanks.title}</h2>
         <p id="madMoji"></p>
         `)
-    
+    //Save button show
+        var saveBtn = $("#recent");
+    saveBtn.removeClass("hide");
     // Loops through the madlib and chosen emojis to generate a madMoji bitches
     for ( var i=0; i < madLibBlanks.value.length -2; i++) {
         $('#madMoji').append(madLibBlanks.value[i] + selectedEmojis[i] + " ");
     }
     $('#madMoji').append(madLibBlanks.value[madLibBlanks.value.length -2]);
 
-    // localStorage.setItem("recentMadMoji",questionContainerEl.innerText);
+    function saveMadmoji () {
+        var madMoji = $("#madMoji")[0].textContent;
+        console.log(madMoji);
+        localStorage.setItem("madMoji", madMoji);
+        
+    }
+    
+    saveBtn.on("click", saveMadmoji); 
+        
 
 };
 
@@ -150,14 +160,27 @@ function chooseMadLibBlanks() {
 function renderEmojiButtons() {
     // Added id's to buttons
         questionContainerEl.append(`
-        <a id="btn-1" class="waves-effect waves-light btn-large deep-orange accent-3 btn1">${randomEmojis[emojiTicker]}</a>
-        <a id="btn-2" class="waves-effect waves-light btn-large deep-orange accent-3 btn2">${randomEmojis[emojiTicker + 1]}</a>
-        <a id="btn-3" class="waves-effect waves-light btn-large deep-orange accent-3 btn3">${randomEmojis[emojiTicker + 2]}</a>
-        <a id="btn-4" class="waves-effect waves-light btn-large deep-orange accent-3 btn4">${randomEmojis[emojiTicker + 3]}</a>
-        <a id="btn-5" class="waves-effect waves-light btn-large deep-orange accent-3 btn5">${randomEmojis[emojiTicker + 4]}</a>
+        <a id="btn-1" style="font-size: 30px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn1">${randomEmojis[emojiTicker]}</a>
+        <a id="btn-2" style="font-size: 30px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn2">${randomEmojis[emojiTicker + 1]}</a>
+        <a id="btn-3" style="font-size: 30px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn3">${randomEmojis[emojiTicker + 2]}</a>
+        <a id="btn-4" style="font-size: 30px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn4">${randomEmojis[emojiTicker + 3]}</a>
+        <a id="btn-5" style="font-size: 30px" class="waves-effect waves-light btn-large #FF9E80 accent-3 btn5">${randomEmojis[emojiTicker + 4]}</a>
         `)
-
+        
         // Increments after first blank has been called
         emojiTicker += 5;
-
+        
+        
+    }
+    
+    
+    
+    
+function saveMadmoji () {
+    var madMoji = $("#madMoji");
+    console.log(madMoji.val);
+    localStorage.setItem("madMoji1", madMoji);
+        
 }
+
+
