@@ -126,7 +126,7 @@ function emojiData(){
 // Grab madlib data
 function madlibData(){
 
-    var url = `http://madlibz.herokuapp.com/api/random?minlength=5&maxlength=10`;
+    var url = `https://madlibz.herokuapp.com/api/random?minlength=5&maxlength=10`;
 
     fetch( url )
         .then(function(response) {
