@@ -174,13 +174,19 @@ function renderEmojiButtons() {
     }
     
     
-    
-    
-function saveMadmoji () {
-    var madMoji = $("#madMoji");
-    console.log(madMoji.val);
-    localStorage.setItem("madMoji1", madMoji);
-        
-}
+ function printRecentMoji(){
+    displayButtonEl.addClass("hide");
+    questionContainerEl.empty();
+    questionContainerEl.append(localStorage.getItem('madMoji'));
+    startGameButtonEl.addClass("hide");
+ }   
+
+ 
+   var displayButtonEl= $("#display");
+   
+   displayButtonEl.on("click", printRecentMoji);
+
+
+ 
 
 
