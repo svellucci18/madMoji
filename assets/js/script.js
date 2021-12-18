@@ -32,6 +32,10 @@ var madMojiTicker = 0;
 madlibData();
 emojiData();
 
+
+
+
+
 // Hides the start game button
 startGameButtonEl.on('click', function(){
     
@@ -42,10 +46,10 @@ startGameButtonEl.on('click', function(){
     displayButtonEl.addClass('hide');
 
     // Render Questions
-    chooseMadLibBlanks();
-    renderEmojiButtons();
+    setTimeout(chooseMadLibBlanks,500);
+    setTimeout(renderEmojiButtons,500);
 
-})
+});
 
 
 // Generates next question after emoji is selected
